@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juan Muñoz — Senior Software Engineer</title>
+<meta name="description" content="Juan Muñoz — Senior Software Engineer with 20+ years across embedded C/C++, enterprise .NET and Azure cloud. Healthcare, manufacturing and automotive.">
+<meta property="og:title" content="Juan Muñoz — Senior Software Engineer">
+<meta property="og:description" content="20+ years from ECU test rigs to Medicaid claims engines to Azure. Open to Senior roles.">
+<meta property="og:url" content="https://juanmunoz.dev">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="canonical" href="https://juanmunoz.dev">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230D1B2A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Impact,sans-serif' font-size='34' fill='%2300C4A0'%3EJM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1B2A;
+    --surface: #132030;
+    --surface2: #1C3048;
+    --accent: #00C4A0;
+    --accent2: #FF6B35;
+    --fg: #EDF2F7;
+    --fg-muted: #7A9BB8;
+    --fg-dim: #3D5A74;
+    --code-bg: #080F18;
+
+    --display: 'Bebas Neue', Impact, sans-serif;
+    --sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+    --mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+    --radius: 10px;
+    --max: 1080px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 27, 42, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--surface2);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-family: var(--display); font-size: 26px; letter-spacing: 1px; color: var(--fg); }
+  .brand span { color: var(--accent); }
+  .brand:hover { text-decoration: none; }
+  nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  nav ul a { font-family: var(--mono); font-size: 13px; color: var(--fg-muted); letter-spacing: .3px; }
+  nav ul a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 640px) { nav ul { gap: 16px; } nav ul li.hide-sm { display: none; } }
+
+  /* ---------- Sections ---------- */
+  section { padding: 96px 0; border-bottom: 1px solid var(--surface); }
+  section:last-of-type { border-bottom: none; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(40px, 6vw, 56px); line-height: 1; letter-spacing: 1px;
+    margin: 0 0 40px;
+  }
+  h3 { font-size: 18px; font-weight: 600; margin: 0; line-height: 1.35; }
+  p { margin: 0 0 16px; }
+  .muted { color: var(--fg-muted); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 120px 0 104px; }
+  .status {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 13px; color: var(--fg-muted);
+    background: var(--surface); border: 1px solid var(--surface2);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 32px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(0,196,160,.6); animation: pulse 2.4s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,196,160,.55); } 70% { box-shadow: 0 0 0 8px rgba(0,196,160,0); } 100% { box-shadow: 0 0 0 0 rgba(0,196,160,0); } }
+  .hero h1 {
+    font-family: var(--display); font-weight: 400;
+    font-size: clamp(64px, 12vw, 132px); line-height: .9; letter-spacing: 2px;
+    margin: 0 0 20px;
+  }
+  .hero .role {
+    font-family: var(--display); font-size: clamp(26px, 3.6vw, 38px); letter-spacing: 1.5px;
+    color: var(--fg-muted); margin: 0 0 28px; line-height: 1.1;
+  }
+  .hero .role em { font-style: normal; color: var(--accent); }
+  .hero .lede { font-size: 19px; max-width: 640px; color: var(--fg); margin-bottom: 40px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    padding: 12px 22px; border-radius: 8px; border: 1px solid var(--surface2);
+    color: var(--fg); background: var(--surface); transition: border-color .15s, background .15s, transform .15s;
+  }
+  .btn:hover { text-decoration: none; border-color: var(--accent); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn.primary:hover { background: #12d6b1; }
+
+  .terminal {
+    margin-top: 64px; max-width: 640px;
+    background: var(--code-bg); border: 1px solid var(--surface2); border-radius: var(--radius);
+    font-family: var(--mono); font-size: 13.5px; line-height: 1.75; overflow: hidden;
+  }
+  .terminal .bar { display: flex; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--surface); }
+  .terminal .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--fg-dim); }
+  .terminal pre { margin: 0; padding: 16px 20px 18px; color: var(--fg-muted); white-space: pre-wrap; }
+  .t-p { color: var(--accent); } .t-k { color: var(--fg); } .t-s { color: var(--accent2); }
+
+  /* ---------- About / Stack ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .about-copy p { color: var(--fg); font-size: 17px; }
+  .about-copy p.muted { color: var(--fg-muted); font-size: 16px; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+  .fact { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 16px; }
+  .fact b { display: block; font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1; color: var(--accent); letter-spacing: 1px; }
+  .fact span { font-size: 13px; color: var(--fg-muted); }
+
+  .stack { display: flex; flex-direction: column; gap: 12px; }
+  .layer { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 18px 20px; }
+  .layer-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; gap: 12px; }
+  .layer-head h3 { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--fg); letter-spacing: 1px; text-transform: uppercase; }
+  .layer-head small { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    font-family: var(--mono); font-size: 12.5px; color: var(--fg-muted);
+    background: var(--code-bg); border: 1px solid var(--surface2);
+    padding: 3px 10px; border-radius: 6px;
+  }
+  .chip.hot { color: var(--accent); border-color: rgba(0,196,160,.35); }
+
+  /* ---------- Experience ---------- */
+  .timeline { position: relative; margin: 0; padding: 0; list-style: none; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--surface2); }
+  .job { position: relative; padding-left: 44px; margin-bottom: 20px; }
+  .job::before {
+    content: ""; position: absolute; left: 0; top: 26px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--fg-dim);
+  }
+  .job.current::before { border-color: var(--accent); background: var(--accent); }
+  .card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 24px 26px; }
+  .job-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+  .job-head time { font-family: var(--mono); font-size: 13px; color: var(--fg-muted); white-space: nowrap; }
+  .org { font-size: 15px; color: var(--accent); margin-bottom: 14px; }
+  .org .loc { color: var(--fg-dim); }
+  .job ul { margin: 0; padding-left: 18px; color: var(--fg-muted); font-size: 15px; }
+  .job li { margin-bottom: 8px; }
+  .job li::marker { color: var(--fg-dim); }
+  .job li strong { color: var(--fg); font-weight: 500; }
+  .job .chips { margin-top: 14px; }
+
+  .earlier { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 720px) { .earlier { grid-template-columns: 1fr; } }
+  .earlier .item { background: var(--code-bg); border: 1px solid var(--surface2); border-radius: 8px; padding: 14px 16px; }
+  .earlier .item h4 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+  .earlier .item h4 span { color: var(--fg-muted); font-weight: 400; }
+  .earlier .item p { margin: 0; font-size: 14px; color: var(--fg-muted); }
+
+  .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 40px; }
+  @media (max-width: 720px) { .edu { grid-template-columns: 1fr; } }
+  .edu .card { padding: 20px 22px; }
+  .edu .label { font-family: var(--mono); font-size: 12px; color: var(--accent2); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .edu p { font-size: 14.5px; color: var(--fg-muted); margin: 0 0 6px; }
+  .edu p b { color: var(--fg); font-weight: 500; }
+
+  /* ---------- Projects ---------- */
+  .projects { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  @media (max-width: 860px) { .projects { grid-template-columns: 1fr; } }
+  .project { display: flex; flex-direction: column; min-width: 0; }
+  .about-grid > *, .contact-card > *, .edu > * { min-width: 0; }
+  .project.feature { border-color: rgba(0,196,160,.4); }
+  .p-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 12px; }
+  .badge {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .badge.live { color: var(--accent); background: rgba(0,196,160,.1); border: 1px solid rgba(0,196,160,.35); }
+  .badge.wip { color: var(--accent2); background: rgba(255,107,53,.1); border: 1px solid rgba(255,107,53,.35); }
+  .project h3 { font-family: var(--display); font-weight: 400; font-size: 38px; letter-spacing: 1px; line-height: 1; margin-bottom: 12px; }
+  .project p { color: var(--fg-muted); font-size: 15.5px; }
+  .arch {
+    background: var(--code-bg); border: 1px solid var(--surface2); border-radius: 8px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--fg-muted);
+    padding: 14px 16px; margin: 6px 0 18px; line-height: 1.8; white-space: pre; overflow-x: auto;
+  }
+  .arch .a { color: var(--accent); } .arch .o { color: var(--accent2); } .arch .f { color: var(--fg); }
+  .project .chips { margin-bottom: 22px; }
+  .p-links { margin-top: auto; display: flex; gap: 18px; flex-wrap: wrap; font-family: var(--mono); font-size: 14px; }
+  .p-links a::after { content: " →"; }
+  .p-note { font-family: var(--mono); font-size: 13px; color: var(--fg-dim); margin-top: auto; }
+
+  /* ---------- Contact ---------- */
+  .contact-card { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; padding: 40px; }
+  @media (max-width: 860px) { .contact-card { grid-template-columns: 1fr; padding: 28px; } }
+  @media (max-width: 520px) { .contact-list > li > a, .contact-list > li > div { flex-direction: column; align-items: flex-start; gap: 4px; } .contact-list .v { text-align: left; } .card { padding: 20px; } .job { padding-left: 32px; } .facts { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  .contact-card h2 { margin-bottom: 18px; }
+  .contact-card .lead { font-size: 17px; color: var(--fg); }
+  .contact-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; align-self: center; }
+  .contact-list > li > a, .contact-list > li > div {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    background: var(--code-bg); border: 1px solid var(--surface2); border-radius: 8px;
+    padding: 14px 18px; color: var(--fg); transition: border-color .15s;
+  }
+  .contact-list > li > a:hover { border-color: var(--accent); text-decoration: none; }
+  .contact-list .k { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-list .v { font-family: var(--mono); font-size: 14px; text-align: right; word-break: break-all; }
+  .copy { cursor: pointer; background: none; border: none; color: var(--fg-muted); font-family: var(--mono); font-size: 12px; padding: 0; }
+  .copy:hover { color: var(--accent); }
+
+  footer { padding: 36px 0 48px; font-family: var(--mono); font-size: 13px; color: var(--fg-dim); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+</style>
+</head>
+<body>
+
+<nav aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top">JM<span>.</span></a>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li class="hide-sm"><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="status"><span class="dot" aria-hidden="true"></span>Open to Senior roles · US work authorized</div>
+      <h1>Juan Muñoz</h1>
+      <p class="role">Senior Software Engineer — <em>from the ECU to the cloud</em></p>
+      <p class="lede">20+ years building and modernizing backend systems in regulated industries. I work across the whole stack beneath the UI: C on Unix batch engines, C#/.NET services and APIs, and the Azure pipelines that ship them.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See the work</a>
+        <a class="btn" href="https://www.linkedin.com/in/juan-munoz-b06b5225" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:juan.arturo.munoz@gmail.com">Email me</a>
+      </div>
+
+      <div class="terminal" aria-label="Summary">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+<pre><span class="t-p">$</span> <span class="t-k">whoami --verbose</span>
+role     <span class="t-s">"Senior Software Engineer"</span>
+years    20+
+domains  [healthcare, manufacturing, automotive]
+stack    C/C++ · C# / .NET · SQL · Python · Azure
+based    El Paso, TX · Borderplex
+status   <span class="t-p">open_to_work</span></pre>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ ABOUT / STACK ============ -->
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow">01 / About</p>
+      <h2>Full-spectrum engineer</h2>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>I started as an Electrical &amp; Computer Engineer building automated ECU test environments at Delphi and analyzing failed automotive electronics at Bosch. That hardware-first grounding — reproduce it, measure it, find the root cause — is still how I debug software.</p>
+          <p>Since then I've worked on Medicaid claims and eligibility platforms in Unix C and Oracle Pro*C, built and led .NET teams in manufacturing, and moved codebases from folder backups to Git, CI/CD and Azure.</p>
+          <p class="muted">I use AI coding agents (Claude Code, Codex) every day across the development lifecycle and hold their output to the same bar as anyone else's: tests and code review before it ships.</p>
+
+          <div class="facts">
+            <div class="fact"><b>20+</b><span>years shipping</span></div>
+            <div class="fact"><b>3</b><span>regulated domains</span></div>
+            <div class="fact"><b>5</b><span>engineers led</span></div>
+          </div>
+        </div>
+
+        <div class="stack" aria-label="Technical stack">
+          <div class="layer">
+            <div class="layer-head"><h3>Cloud &amp; Delivery</h3><small>ship it</small></div>
+            <div class="chips">
+              <span class="chip hot">Azure</span><span class="chip">Azure Static Web Apps</span><span class="chip">App Service</span>
+              <span class="chip hot">GitHub Actions</span><span class="chip">Azure DevOps</span><span class="chip">CI/CD</span><span class="chip">Git</span><span class="chip">Docker</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="layer-head"><h3>Enterprise .NET</h3><small>build it</small></div>
+            <div class="chips">
+              <span class="chip hot">C#</span><span class="chip hot">.NET 8</span><span class="chip">ASP.NET Core</span><span class="chip">EF Core</span>
+              <span class="chip">Blazor</span><span class="chip">REST / OpenAPI</span><span class="chip">SQL Server</span><span class="chip">Oracle</span><span class="chip">PostgreSQL</span>
+              <span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">xUnit</span><span class="chip">SSRS</span>
+            </div>
+          </div>
+          <div class="layer">
+            <div class="layer-head"><h3>Systems &amp; Embedded</h3><small>under the hood</small></div>
+            <div class="chips">
+              <span class="chip hot">C/C++</span><span class="chip">Unix C</span><span class="chip">Oracle Pro*C</span><span class="chip">Batch engines</span>
+              <span class="chip">Python</span><span class="chip">Bash</span><span class="chip">LabWindows/CVI</span><span class="chip">NI hardware</span><span class="chip">Raspberry Pi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow">02 / Experience</p>
+      <h2>Where I've shipped</h2>
+
+      <ol class="timeline">
+        <li class="job current">
+          <article class="card">
+            <div class="job-head"><h3>Senior Software Engineer</h3><time>07/2024 – 09/2026</time></div>
+            <div class="org">Gainwell Technologies <span class="loc">· El Paso, TX · Healthcare</span></div>
+            <ul>
+              <li><strong>Medicaid batch processing.</strong> Diagnosed production defects and tuned performance in Unix C and Oracle Pro*C batch engines behind multi-state Medicaid claims and Eligibility &amp; Enrollment.</li>
+              <li><strong>Core engine &amp; business rules.</strong> Designed and implemented automated business-rules enforcement and data operations inside the core claims processing engine.</li>
+              <li><strong>Defect prevention.</strong> Unit and integration testing with cross-functional leads, catching critical edge cases before production rollout.</li>
+            </ul>
+            <div class="chips"><span class="chip">Unix C</span><span class="chip">Pro*C</span><span class="chip">Oracle</span><span class="chip">Medicaid</span></div>
+          </article>
+        </li>
+
+        <li class="job">
+          <article class="card">
+            <div class="job-head"><h3>Lead Software Engineer</h3><time>01/2020 – 02/2024</time></div>
+            <div class="org">Firstronic-Lacroix <span class="loc">· Juárez, MX · Manufacturing</span></div>
+            <ul>
+              <li><strong>DevOps transformation.</strong> Inherited a codebase with no version control and ad hoc deploys; led 5 engineers to Git and a tailored Scrum process on Azure DevOps with automated test gates.</li>
+              <li><strong>Real-time supply chain monitoring.</strong> Re-architected batch reporting into real-time automated alerts — delivery-risk visibility went from days to minutes.</li>
+              <li><strong>Secure cross-domain portal.</strong> Built an Azure App Service portal giving a key customer access to production test records without exposing the internal network.</li>
+              <li><strong>Automation.</strong> Python and C# tooling cut manual supply chain data processing ~85% (4 hours → 15 minutes).</li>
+              <li><strong>Shop-floor work instructions.</strong> Python app on Raspberry Pi displays across ~70–80 stations on 10 lines, each pulling its current instructions from a central server.</li>
+            </ul>
+            <div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET</span><span class="chip">EF</span><span class="chip">SQL Server</span><span class="chip">Azure</span><span class="chip">Python</span></div>
+          </article>
+        </li>
+
+        <li class="job">
+          <article class="card">
+            <div class="job-head"><h3>Software Developer Engineer II</h3><time>01/2014 – 04/2019</time></div>
+            <div class="org">HP / HPE / DXC Technology <span class="loc">· El Paso, TX · Healthcare</span></div>
+            <ul>
+              <li><strong>Medicaid claims batch systems.</strong> Maintenance, root-cause analysis and performance work on Unix C and Pro*C batch routines for Florida and Colorado Medicaid.</li>
+              <li><strong>Modular architecture.</strong> Refactored MVC-based claims modules to modern design patterns, improving maintainability and reducing subsystem overhead.</li>
+            </ul>
+            <div class="chips"><span class="chip">Unix C</span><span class="chip">Pro*C</span><span class="chip">ASP.NET MVC</span></div>
+          </article>
+        </li>
+
+        <li class="job">
+          <article class="card">
+            <div class="job-head"><h3>Earlier experience</h3><time>Automotive &amp; ERP</time></div>
+            <div class="org">Embedded, test and systems roles <span class="loc">· Juárez / El Paso</span></div>
+            <div class="earlier">
+              <div class="item"><h4>Delphi Automotive <span>· Systems/Product Engineer</span></h4><p>Automated ECU test environments in LabWindows/CVI with NI hardware; co-developed an ECU simulator demonstrated at GM HQ, Detroit.</p></div>
+              <div class="item"><h4>Bosch Automotive <span>· Warranty Analysis Engineer</span></h4><p>Root-cause failure analysis on returned ECUs — reproduced faults in the lab and drove corrective action.</p></div>
+              <div class="item"><h4>Epic Technologies <span>· Software Developer</span></h4><p>In-house production control and warehouse ERP systems in VB.NET and SQL Server.</p></div>
+              <div class="item"><h4>DataXport.Net <span>· Systems Technician</span></h4><p>Client-server database tools in VB and SQL Server.</p></div>
+            </div>
+          </article>
+        </li>
+      </ol>
+
+      <div class="edu">
+        <div class="card">
+          <div class="label">Education</div>
+          <p><b>B.S. Electrical &amp; Computer Engineering</b> — Embedded Systems<br>Universidad Autónoma de Ciudad Juárez</p>
+          <p><b>Graduate Studies, Applied Computing</b> — Cloud Computing (coursework completed)<br>Thesis research: Smart Contracts for Supply Chain Management</p>
+        </div>
+        <div class="card">
+          <div class="label">Research &amp; Credentials</div>
+          <p><b>"Heuristic Mechanism for Drone Swarm Auto-organization"</b><br>Research in Computing Science, Vol. 147(2), 2018</p>
+          <p>Google Data Analytics Professional Certificate · Web Applications Specialist (U. Michigan)</p>
+          <p>English (advanced) · Spanish (native) · French (basic)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow">03 / Projects</p>
+      <h2>Built in the open</h2>
+
+      <div class="projects">
+        <article class="card project feature">
+          <div class="p-top"><span class="badge live"><span class="dot" aria-hidden="true"></span>Live</span><span class="muted" style="font-family:var(--mono);font-size:12px">jobtracker.juanmunoz.dev</span></div>
+          <h3>Job Tracker</h3>
+          <p>A full-stack application for tracking job applications end to end — companies, roles, stages and follow-ups. Built the way I'd build it on a team: typed API contract, tests, and every push going through CI/CD to Azure.</p>
+<div class="arch" aria-label="Architecture"><span class="f">Angular SPA</span>  ──▶  <span class="a">Azure Static Web Apps</span>
+     │
+     ▼  REST / OpenAPI
+<span class="f">.NET 8 API</span>   ──▶  <span class="a">Azure</span>  ·  EF Core  ·  SQL
+     ▲
+<span class="o">GitHub Actions</span>  build · test · deploy on push</div>
+          <div class="chips">
+            <span class="chip hot">.NET 8</span><span class="chip">ASP.NET Core</span><span class="chip">EF Core</span>
+            <span class="chip hot">Angular</span><span class="chip">TypeScript</span>
+            <span class="chip hot">Azure Static Web Apps</span><span class="chip">GitHub Actions</span>
+          </div>
+          <div class="p-links">
+            <a href="https://jobtracker.juanmunoz.dev" target="_blank" rel="noopener">Open the app</a>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="p-top"><span class="badge wip">In progress</span></div>
+          <h3>Outrally</h3>
+          <p>An offline-first PWA for hiking groups — trail safety info, emergency medical details and first-aid guides that still work with no signal. Multi-tenant from day one, starting with a hiking group I lead in El Paso.</p>
+          <div class="chips">
+            <span class="chip">Blazor WASM</span><span class="chip">ASP.NET Core</span><span class="chip">.NET 8</span>
+            <span class="chip">EF Core</span><span class="chip">SQL Server</span><span class="chip">PWA</span><span class="chip">GitHub Actions</span>
+          </div>
+          <p class="p-note">// multi-tenant DbContext · offline sync with LocalStorage fallback</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="card contact-card">
+        <div>
+          <p class="eyebrow">04 / Contact</p>
+          <h2>Let's talk</h2>
+          <p class="lead">I'm open to Senior Software Engineer roles — backend, .NET, platform modernization, or anywhere legacy systems meet the cloud.</p>
+          <p class="muted">Remote, hybrid, or on-site in the El Paso area. Authorized to work in the US (TN).</p>
+        </div>
+        <ul class="contact-list">
+          <li>
+            <div>
+              <span class="k">Email</span>
+              <span class="v"><a href="mailto:juan.arturo.munoz@gmail.com">juan.arturo.munoz@gmail.com</a> &nbsp;<button class="copy" type="button" data-copy="juan.arturo.munoz@gmail.com" aria-label="Copy email address">[copy]</button></span>
+            </div>
+          </li>
+          <li><a href="https://www.linkedin.com/in/juan-munoz-b06b5225" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">in/juan-munoz-b06b5225</span></a></li>
+          <li><div><span class="k">Location</span><span class="v">El Paso, TX</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Juan Muñoz</span>
+    <span>Hand-written HTML · Azure Static Web Apps</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      var done = function () { btn.textContent = '[copied]'; setTimeout(function () { btn.textContent = '[copy]'; }, 1600); };
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, function () {}); }
+    });
+  });
+</script>
+</body>
+</html>
