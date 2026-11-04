@@ -237,6 +237,29 @@
   footer { padding: 36px 0 48px; font-family: var(--mono); font-size: 13px; color: var(--fg-dim); }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
+  /* ---------- Projects carousel (right column) ---------- */
+  .carousel { display: flex; flex-direction: column; min-width: 0; padding-bottom: 20px; }
+  .carousel-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .carousel-label { font-family: var(--mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--fg-muted); }
+  .carousel-nav { display: flex; align-items: center; gap: 10px; }
+  .carousel-nav button {
+    width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+    background: var(--code-bg); border: 1px solid var(--surface2); color: var(--fg);
+    font-family: var(--mono); font-size: 15px; line-height: 1; transition: border-color .15s, color .15s;
+  }
+  .carousel-nav button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .carousel-nav button:disabled { opacity: .35; cursor: default; }
+  .carousel-count { font-family: var(--mono); font-size: 13px; color: var(--fg-muted); min-width: 40px; text-align: center; }
+  .carousel-track {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    scrollbar-width: none; flex: 1; border-radius: 6px;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track .slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column; }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .carousel-dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: none; cursor: pointer; background: var(--surface2); }
+  .carousel-dots button[aria-current="true"] { background: var(--accent); }
+
   /* ---------- Testimonials ---------- */
   .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .testimonial { margin: 0; display: flex; flex-direction: column; }
@@ -460,16 +483,46 @@ status   <span class="t-p">open_to_work</span></pre>
           </div>
         </article>
 
-        <article class="card project">
-          <div class="p-top"><span class="badge wip">In progress</span></div>
-          <h3>Outrally</h3>
-          <p>An offline-first PWA for hiking groups — trail safety info, emergency medical details and first-aid guides that still work with no signal. Multi-tenant from day one, starting with a hiking group I lead in El Paso.</p>
-          <div class="chips">
-            <span class="chip">Blazor WASM</span><span class="chip">ASP.NET Core</span><span class="chip">.NET 8</span>
-            <span class="chip">EF Core</span><span class="chip">SQL Server</span><span class="chip">PWA</span><span class="chip">GitHub Actions</span>
+        <div class="card carousel" id="project-carousel" role="region" aria-roledescription="carousel" aria-label="More projects">
+          <div class="carousel-head">
+            <span class="carousel-label">More projects</span>
+            <div class="carousel-nav">
+              <button type="button" class="carousel-prev" aria-label="Previous project">←</button>
+              <span class="carousel-count" aria-live="polite">1 / 2</span>
+              <button type="button" class="carousel-next" aria-label="Next project">→</button>
+            </div>
           </div>
-          <p class="p-note">// multi-tenant DbContext · offline sync with LocalStorage fallback</p>
-        </article>
+          <div class="carousel-track" tabindex="0" aria-label="Projects, scroll horizontally">
+
+            <article class="project slide" aria-roledescription="slide">
+              <div class="p-top"><span class="badge wip">In progress</span></div>
+              <h3>Outrally</h3>
+              <p>An offline-first PWA for hiking groups — trail safety info, emergency medical details and first-aid guides that still work with no signal. Multi-tenant from day one, starting with a hiking group I lead in El Paso.</p>
+              <div class="chips">
+                <span class="chip">Blazor WASM</span><span class="chip">ASP.NET Core</span><span class="chip">.NET 8</span>
+                <span class="chip">EF Core</span><span class="chip">SQL Server</span><span class="chip">PWA</span><span class="chip">GitHub Actions</span>
+              </div>
+              <p class="p-note">// multi-tenant DbContext · offline sync with LocalStorage fallback</p>
+            </article>
+
+            <article class="project slide" aria-roledescription="slide">
+              <div class="p-top"><span class="badge wip">In development</span></div>
+              <h3>Virtual ECU</h3>
+              <p>A software-only automotive ECU: C firmware that broadcasts sensor data over CAN, detects faults and answers UDS diagnostic requests from a scan-tool-style tester. It's a modern version of the ECU simulators I built at Delphi, and it runs with no hardware at all.</p>
+<div class="arch" aria-label="Architecture"><span class="f">ECU (C)</span> ──CAN──▶ <span class="a">vcan0</span> ◀──UDS── <span class="f">Tester</span>
+<span class="o">GitHub Actions</span>  build · tests · MISRA · SIL</div>
+              <div class="chips">
+                <span class="chip hot">C</span><span class="chip hot">CAN</span><span class="chip hot">UDS (ISO 14229)</span>
+                <span class="chip">ISO-TP</span><span class="chip">SocketCAN</span><span class="chip">RTOS</span>
+                <span class="chip">MISRA C</span><span class="chip">Python</span><span class="chip">GitHub Actions</span>
+              </div>
+              <p class="p-note">// software-in-the-loop · no hardware required</p>
+            </article>
+
+          </div>
+          <div class="carousel-dots" role="group" aria-label="Choose a project"></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -601,6 +654,61 @@ status   <span class="t-p">open_to_work</span></pre>
       .catch(function () { /* leave the section hidden */ });
   })();
 
+  // ---------- Projects carousel ----------
+  (function () {
+    var root = document.getElementById('project-carousel');
+    if (!root) return;
+    var track = root.querySelector('.carousel-track');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+    var prev = root.querySelector('.carousel-prev');
+    var next = root.querySelector('.carousel-next');
+    var count = root.querySelector('.carousel-count');
+    var dotsBox = root.querySelector('.carousel-dots');
+    var total = slides.length;
+    var current = 0;
+
+    slides.forEach(function (slide, i) {
+      slide.setAttribute('aria-label', (i + 1) + ' of ' + total);
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Show project ' + (i + 1) + ' of ' + total);
+      dot.addEventListener('click', function () { go(i); });
+      dotsBox.appendChild(dot);
+    });
+    var dots = dotsBox.querySelectorAll('button');
+
+    function go(i) {
+      i = Math.max(0, Math.min(total - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+
+    function update() {
+      current = Math.max(0, Math.min(total - 1, Math.round(track.scrollLeft / track.clientWidth)));
+      count.textContent = (current + 1) + ' / ' + total;
+      prev.disabled = current === 0;
+      next.disabled = current === total - 1;
+      for (var d = 0; d < dots.length; d++) {
+        dots[d].setAttribute('aria-current', d === current ? 'true' : 'false');
+      }
+      slides.forEach(function (s, d) {
+        if (d === current) { s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); }
+        else { s.setAttribute('inert', ''); s.setAttribute('aria-hidden', 'true'); }
+      });
+    }
+
+    prev.addEventListener('click', function () { go(current - 1); });
+    next.addEventListener('click', function () { go(current + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+    });
+    var t;
+    track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 60); });
+    window.addEventListener('resize', function () { go(current); });
+
+    if (total < 2) { root.querySelector('.carousel-nav').hidden = true; dotsBox.hidden = true; }
+    update();
+  })();
 </script>
 </body>
 </html>
