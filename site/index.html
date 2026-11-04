@@ -236,6 +236,35 @@
 
   footer { padding: 36px 0 48px; font-family: var(--mono); font-size: 13px; color: var(--fg-dim); }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .testimonial { margin: 0; display: flex; flex-direction: column; }
+  .testimonial blockquote {
+    position: relative; margin: 0 0 20px; padding-top: 30px;
+    font-size: 16.5px; line-height: 1.65; color: var(--fg);
+  }
+  .testimonial blockquote::before {
+    content: "\201C"; position: absolute; top: -10px; left: -2px;
+    font-family: var(--display); font-size: 64px; line-height: 1; color: var(--accent);
+  }
+  .testimonial blockquote p { margin: 0; }
+  .translation {
+    margin: -6px 0 20px; padding: 12px 14px;
+    background: var(--code-bg); border-left: 2px solid var(--accent2); border-radius: 6px;
+    font-size: 15px; color: var(--fg-muted);
+  }
+  .translation .label {
+    display: block; margin-bottom: 4px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent2);
+  }
+  .translation p { margin: 0; }
+  .testimonial figcaption { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--surface2); }
+  .t-name { display: block; font-weight: 600; color: var(--fg); }
+  .t-meta { display: block; font-size: 14px; color: var(--fg-muted); }
+  .t-link { display: inline-block; margin-top: 10px; font-family: var(--mono); font-size: 13px; }
+  .t-link::after { content: " ↗"; }
+
 </style>
 </head>
 <body>
@@ -247,6 +276,7 @@
       <li><a href="#about">about</a></li>
       <li><a href="#experience">experience</a></li>
       <li><a href="#projects">projects</a></li>
+      <li class="hide-sm" id="nav-testimonials" hidden><a href="#testimonials">testimonials</a></li>
       <li class="hide-sm"><a href="#contact">contact</a></li>
     </ul>
   </div>
@@ -444,12 +474,21 @@ status   <span class="t-p">open_to_work</span></pre>
     </div>
   </section>
 
+  <!-- ============ TESTIMONIALS ============ -->
+  <section id="testimonials" aria-labelledby="testimonials-heading" hidden>
+    <div class="wrap">
+      <p class="eyebrow">04 / Testimonials</p>
+      <h2 id="testimonials-heading">What colleagues say</h2>
+      <div class="testimonials" id="testimonials-list"></div>
+    </div>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <section id="contact">
     <div class="wrap">
       <div class="card contact-card">
         <div>
-          <p class="eyebrow">04 / Contact</p>
+          <p class="eyebrow">05 / Contact</p>
           <h2>Let's talk</h2>
           <p class="lead">I'm open to Senior Software Engineer roles — backend, .NET, platform modernization, or anywhere legacy systems meet the cloud.</p>
           <p class="muted">Remote, hybrid, or on-site in the El Paso area. Authorized to work in the US (TN).</p>
@@ -486,6 +525,82 @@ status   <span class="t-p">open_to_work</span></pre>
       if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, function () {}); }
     });
   });
+
+  // ---------- Testimonials (data: testimonials.json) ----------
+  (function () {
+    var section = document.getElementById('testimonials');
+    var list = document.getElementById('testimonials-list');
+    var navItem = document.getElementById('nav-testimonials');
+    if (!section || !list || !window.fetch) return;
+
+    function el(tag, className, text) {
+      var node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
+    function isLinkedIn(url) {
+      try {
+        var u = new URL(url);
+        return u.protocol === 'https:' && /(^|\.)linkedin\.com$/.test(u.hostname);
+      } catch (e) { return false; }
+    }
+
+    fetch('testimonials.json', { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (items) {
+        if (!Array.isArray(items)) return;
+        var shown = 0;
+
+        items.forEach(function (t) {
+          if (!t || !t.name || !t.quote) return;
+
+          var fig = el('figure', 'card testimonial');
+
+          var quote = el('blockquote');
+          if (t.lang) quote.lang = t.lang;
+          if (isLinkedIn(t.linkedin)) quote.cite = t.linkedin;
+          quote.appendChild(el('p', null, t.quote));
+          fig.appendChild(quote);
+
+          if (t.translation) {
+            var tr = el('div', 'translation');
+            tr.lang = 'en';
+            tr.appendChild(el('span', 'label', 'English translation'));
+            tr.appendChild(el('p', null, t.translation));
+            fig.appendChild(tr);
+          }
+
+          var cap = el('figcaption');
+          cap.appendChild(el('span', 't-name', t.name));
+          var meta = [t.title, t.relationship].filter(Boolean).join(' · ');
+          if (meta) cap.appendChild(el('span', 't-meta', meta));
+          if (isLinkedIn(t.linkedin)) {
+            var a = el('a', 't-link', 'Read on LinkedIn');
+            a.href = t.linkedin;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.setAttribute('aria-label', 'Read ' + t.name + "'s recommendation on LinkedIn (opens in a new tab)");
+            cap.appendChild(a);
+          }
+          fig.appendChild(cap);
+
+          list.appendChild(fig);
+          shown++;
+        });
+
+        if (shown > 0) {
+          section.hidden = false;
+          if (navItem) navItem.hidden = false;
+        }
+      })
+      .catch(function () { /* leave the section hidden */ });
+  })();
+
 </script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Luis Carrasco",
+    "title": "Senior Software Engineer",
+    "relationship": "Mentored by Juan",
+    "quote": "It was with Juan's leadership and mentoring that I launched my career. … Juan will take ownership and create opportunities for both delivering and creating more product owners.",
+    "translation": null,
+    "linkedin": "https://www.linkedin.com/in/carrascoluis/"
+  },
+  {
+    "name": "Alfredo Hoyos",
+    "title": "Lead Engineer",
+    "relationship": "Worked with Juan on the same team",
+    "quote": "He approaches complex engineering problems with strategic vision and meticulous execution. … not just a brilliant technical asset, but a wonderful colleague and mentor.",
+    "translation": null,
+    "linkedin": "https://www.linkedin.com/in/alfredo-hoyos-004b9560/"
+  },
+  {
+    "name": "Bryan Chavarria",
+    "title": "Software Engineer",
+    "relationship": "Worked with Juan on the same team",
+    "quote": "Una excelente persona, y desarrollador. Es muy bueno para coordinar proyectos, y trabajar en equipo.",
+    "translation": "An excellent person and developer. Very good at coordinating projects and working as a team.",
+    "linkedin": "https://www.linkedin.com/in/ingebryan/"
+  }
+]
